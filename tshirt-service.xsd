@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://mulesoft.org/tshirt-service"
+           xmlns="http://mulesoft.org/tshirt-service"
+           elementFormDefault="qualified">
+
+    <!-- Authentication Header -->
+    <xs:element name="AuthenticationHeader">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- API Usage Info Header -->
+    <xs:element name="APIUsageInformation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="requestId" type="xs:string"/>
+                <xs:element name="timestamp" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Fault message -->
+    <xs:element name="TshirtFault">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="errorCode" type="xs:string"/>
+                <xs:element name="errorMessage" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- OrderTshirt request/response -->
+    <xs:element name="OrderTshirtRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="size" type="xs:string"/>
+                <xs:element name="color" type="xs:string"/>
+                <xs:element name="quantity" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="OrderTshirtResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="orderId" type="xs:string"/>
+                <xs:element name="estimatedDelivery" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ListInventory response -->
+    <xs:element name="ListInventoryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="item" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="size" type="xs:string"/>
+                            <xs:element name="color" type="xs:string"/>
+                            <xs:element name="stock" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- TrackOrder request/response -->
+    <xs:element name="TrackOrderRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="orderId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TrackOrderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+                <xs:element name="estimatedDelivery" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
