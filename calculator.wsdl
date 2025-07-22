@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://example.com/calculator"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    targetNamespace="http://example.com/calculator"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <!-- Types section imports the schema -->
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://example.com/calculator"
+                  schemaLocation="calculator.xsd"/>
+    </xsd:schema>
+  </types>
+
+  <!-- Messages -->
+  <message name="AddRequest">
+    <part name="parameters" element="tns:AddRequest"/>
+  </message>
+
+  <message name="AddResponse">
+    <part name="parameters" element="tns:AddResponse"/>
+  </message>
+
+  <!-- PortType -->
+  <portType name="CalculatorPortType">
+    <operation name="Add">
+      <input message="tns:AddRequest"/>
+      <output message="tns:AddResponse"/>
+    </operation>
+  </portType>
+
+  <!-- Binding -->
+  <binding name="CalculatorBinding" type="tns:CalculatorPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="Add">
+      <soap:operation soapAction="http://example.com/calculator/Add"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <!-- Service -->
+  <service name="CalculatorService">
+    <port name="CalculatorPort" binding="tns:CalculatorBinding">
+      <soap:address location="http://localhost:8080/calculator"/>
+    </port>
+  </service>
+
+</definitions>
