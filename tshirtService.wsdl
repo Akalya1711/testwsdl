@@ -178,3 +178,30 @@
             <wsdl:output>
                 <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service"/>
             </wsdl:output>
+            <wsdl:fault name="TshirtFault">
+                <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="TrackOrder">
+            <soap:operation soapAction="http://mulesoft.org/tshirt-service/track-order"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service"/>
+            </wsdl:output>
+            <wsdl:fault name="TshirtFault">
+                <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- Service -->
+    <wsdl:service name="TshirtService">
+        <wsdl:port name="TshirtServiceSoapPort" binding="ms:TshirtServiceSoapBinding">
+            <soap:address location="http://example.com/tshirtservice"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
